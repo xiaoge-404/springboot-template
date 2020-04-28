@@ -3,8 +3,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: "root"
     password: "Songxiao123."
-    url:  jdbc:mysql://10.0.0.40:3306/demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
-
-#mybatis:
-#  mapper-locations:
-#    - classpath:mapper/*.xml
+    url:  jdbc:mysql://10.0.0.40:3306/employees?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    mode: HTML5
+    cache: false
