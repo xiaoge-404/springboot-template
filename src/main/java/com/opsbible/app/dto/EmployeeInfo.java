@@ -22,6 +22,12 @@ public class EmployeeInfo {
 
     private BaseInfo userInfo;
 
+    @ApiModelProperty(value = "职位名称")
+    private String title;
+
+    @ApiModelProperty(value = "所属部门")
+    private String departMent;
+
     @ApiModelProperty(value = "入职日期")
     private Date hireDate;
 

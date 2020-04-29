@@ -26,21 +26,6 @@ class AppApplicationTests {
 	@Test
 	void contextLoads() throws ParseException {
 
-		BaseInfo baseInfo = BaseInfo.builder()
-				.birthDate("1957-05-29")
-				.firstName("Mary")
-				.lastName("Swift")
-				.gender(GenderEnum.MALE.getCode()).build();
-
-
-		System.out.println(baseInfo.toString());
-		Employees e = employeeMapper.selectEmployeeByBaseInfo(baseInfo);
-		System.out.println(e.toString());
-		String status = employeeMapper.ping(1);
-		System.out.println(status);
-
-		EmployeeInfo employeeInfo = employeeService.queryEmployeeInfo(baseInfo);
-		System.out.println(employeeInfo.toString());
 
 	}
 

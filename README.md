@@ -77,42 +77,153 @@ thymeleaf:
 
 去除ping表(额外添加的),其他根据名称大概可以看出主要用功能
 
-employees 为雇员基本信息,包含以下字段:
+employees (雇员信息):
 
+| 列         | 类型          | 注释 |
+| :--------- | ------------- | :--: |
+| emp_no     | int           |      |
+| birth_date | date          |      |
+| first_name | varchar(14)   |      |
+| last_name  | varchar(16)   |      |
+| gender     | enum('M','F') |      |
+| hire_date  | date          |      |
 
+titles(职位名称):
+
+| 列        | 类型        | 注释 |
+| :-------- | ----------- | ---- |
+| emp_no    | int         |      |
+| title     | varchar(50) |      |
+| from_date | date        |      |
+| to_date   | date *NULL* |      |
+
+salaries(薪资收入):
+
+| 列        | 类型 | 注释 |
+| :-------- | ---- | ---- |
+| emp_no    | int  |      |
+| salary    | int  |      |
+| from_date | date |      |
+| to_date   | date |      |
+
+departments(部门):
+
+| 列        | 类型        | 注释 |
+| :-------- | ----------- | ---- |
+| dept_no   | char(4)     |      |
+| dept_name | varchar(40) |      |
+
+depat_emp(员工部门对应关系):
+
+| 列        | 类型    | 注释 |
+| :-------- | ------- | ---- |
+| emp_no    | int     |      |
+| dept_no   | char(4) |      |
+| from_date | date    |      |
+| to_date   | date    |      |
+
+dept_manager(部门管理人):
+
+| 列        | 类型    | 注释 |
+| :-------- | ------- | ---- |
+| emp_no    | int     |      |
+| dept_no   | char(4) |      |
+| from_date | date    |      |
+| to_date   | date    |      |
+
+剩余两个视图暂不用理会!
 
 ### 相关`Sql`语句
 
+查询员工:
 
-1. 查询员工是否在职
-2. 查询员工在职期间总收益
-3. 查询员工是否是管理
-4. 查询公司一共有那些部门
-5. 查询各个部门当前在职人数
-6. 查询各个部门平均薪资水平
-7. 查询男女比例
-8. 查询男女薪资比例
-9. 查询出薪资最高的人的基本信息
+1. 查询指定员工详细信息
+
+```mysql
+select e.birth_date,e.first_name,e.last_name,e.gender,e.hire_date,t.title,dp.dept_name from employees as e
+left join titles as t
+on t.emp_no = e.emp_no
+left join dept_emp as d
+on d.emp_no = e.emp_no
+left join departments as dp
+on dp.dept_no = d.dept_no
+ where first_name="Mary" and last_name="Swift" # 此次开发时换成emp_id
+```
+
+| birth_date | first_name | last_name | gender | hire_date  |    title     |    dept_name    |
+| :--------: | :--------: | :-------: | :----: | :--------: | :----------: | :-------------: |
+| 1957-05-29 |    Mary    |   Swift   |   M    | 1994-05-17 | Senior Staff | Human Resources |
+
+
 
 添加员工: 
+
 1. 添加员工到对应部门,定当年薪资
+
+查询当前最后一个id:
+
+```mysql
+select emp_no from employees order by emp_no desc limit 1;
+```
+
+插入员工当前的id加1:
+
+```mysql
+INSERT INTO `employees` (`emp_no`, `birth_date`, `first_name`, `last_name`, `gender`, `hire_date`)
+VALUES ('500000', '1992-11-13', 'song', 'xiao', 1, '2020-05-01');
+```
+
+```mysql
+INSERT INTO `salaries` (`emp_no`, `salary`, `from_date`, `to_date`)
+VALUES ('500000', '68888', '2020-05-01', '9999-01-01');
+```
+
+```mysql
+INSERT INTO `titles` (`emp_no`, `title`, `from_date`, `to_date`)
+VALUES ('500000', 'Senior Engineer', '2020-05-01', '9999-01-01');
+```
+
+```mysql
+INSERT INTO `dept_emp` (`emp_no`, `dept_no`, `from_date`, `to_date`)
+VALUES ('500000', 'd005', '2020-05-01', '9999-01-01');
+```
 
 删除员工:
 1. 删除当前在职员工信息
 
+```mysql
+DELETE FROM `employees`
+WHERE `emp_no` = '500000';
+```
+
+```mysql
+DELETE FROM `salaries`
+WHERE `emp_no` = '500000';
+```
+
+```mysql
+DELETE FROM `dept_emp`
+WHERE `emp_no` = '500000';
+```
+
+```mysql
+DELETE FROM `titles`
+WHERE `emp_no` = '500000';
+```
+
 更改员工:
 1. 更改员工薪资
 
+```mysql
+UPDATE `salaries` SET
+`salary` = '78888',
+`from_date` = '2020-07-01'
+WHERE `emp_no` = '500000' ;
+```
 
-接口测试要求:
-1. 纯查询接口一个
-2. 纯修改接口一个
-3. 纯删除接口一个
-4. 多表联查接口一个
-5. 多表增加接口一个
 
 
-api: 
+api:
 
 涉及sql:
 
