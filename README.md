@@ -71,11 +71,18 @@ thymeleaf:
     cache: false
 ```
 
+### 数据库数据介绍
+
+![dbinfo](C:\Users\sun\Desktop\app\app\others\images\dbinfo.png)
+
+去除ping表(额外添加的),其他根据名称大概可以看出主要用功能
+
+employees 为雇员基本信息,包含以下字段:
+
+
+
 ### 相关`Sql`语句
 
-数据库操作查询需求规划:
-根据employees表中 first_name,last_name,birth_date,gender 来查询这个人,传递四个参数可以避免查询到的重名重性的员工,最主要的是查询到员工编号
-根据员工编号可以查询到员工对应部门,以及是否是管理者,也能查询到员工每年的薪资,以及离职日期,我们根据此库可以获取以下信息
 
 1. 查询员工是否在职
 2. 查询员工在职期间总收益
