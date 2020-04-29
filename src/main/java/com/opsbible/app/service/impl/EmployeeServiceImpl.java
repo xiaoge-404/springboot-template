@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -37,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeInfo employeeInfo = EmployeeInfo.builder()
                 .empNo(employees.getEmpNo())
                 .userInfo(userInfo)
-                .DepartureDate(salaries.get(salaries.size()-1).getToDate())
+                .departureDate(salaries.get(salaries.size()-1).getToDate())
                 .hireDate(employees.getHireDate())
                 .totalSalaries(totalSalary)
                 .build();

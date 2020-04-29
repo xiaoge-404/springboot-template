@@ -3,7 +3,6 @@ package com.opsbible.app.service;
 import com.opsbible.app.dto.BaseInfo;
 import com.opsbible.app.dto.EmployeeInfo;
 
-import java.text.ParseException;
 
 public interface EmployeeService {
 
