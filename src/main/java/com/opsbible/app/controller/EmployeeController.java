@@ -2,16 +2,14 @@ package com.opsbible.app.controller;
 
 import com.opsbible.app.common.RestResponse;
 import com.opsbible.app.dto.BaseInfo;
-import com.opsbible.app.dto.UpdateSalary;
+import com.opsbible.app.dto.NewEmployee;
+import com.opsbible.app.dto.Salary;
 import com.opsbible.app.service.EmployeeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
 
 
 @Api(value = "员工信息controller",tags = {"员工信息"})
@@ -25,6 +23,11 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
+    @ApiOperation(value = "添加一个新员工",notes = "根据参数条件添加员工",httpMethod = "POST")
+    @RequestMapping(value = "/employee/add", method = RequestMethod.POST,produces = {"application/json"})
+    public RestResponse addEmployee(@RequestBody @ApiParam(name = "员工资料",value = "传入json格式",required = true) NewEmployee newEmployee) throws ParseException {
+        return employeeService.addEmployee(newEmployee);
+    }
 
     @ApiOperation(value = "获取员工基本信息",notes = "主要返回员工id和离职日期和在职总收入",httpMethod = "POST")
     @RequestMapping(value = "/employee", method = RequestMethod.POST,produces = {"application/json"})
@@ -40,7 +43,35 @@ public class EmployeeController {
 
     @ApiOperation(value = "修改员工薪资",notes = "修改员工薪资,生效日期",httpMethod = "POST")
     @RequestMapping(value = "/employee/update/salary", method = RequestMethod.POST,produces = {"application/json"})
-    public RestResponse modifyEmployeeSalary(@RequestBody @ApiParam(name = "员工薪资",value = "传入json格式",required = true) UpdateSalary updateSalary) {
-        return employeeService.updateEmployeeSalary(updateSalary);
+    public RestResponse modifyEmployeeSalary(@RequestBody @ApiParam(name = "员工薪资",value = "传入json格式",required = true) Salary salary) {
+        return employeeService.updateEmployeeSalary(salary);
     }
+
+    @ApiOperation(value = "薪资查询",notes = "根据员工ID查薪资",httpMethod = "GET")
+    @RequestMapping(value = "/employee/show/salaries", method = RequestMethod.GET,produces = {"application/json"})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "empNo",value = "员工编号",dataType = "Integer")
+    })
+    public RestResponse showEmployeeSalary(Integer empNo) {
+        return employeeService.queryEmployeeSalaries(empNo);
+    }
+
+    @ApiOperation(value = "查询员工基本信息",notes = "根据员工ID查信息",httpMethod = "GET")
+    @RequestMapping(value = "/employee/show/employeebyempno", method = RequestMethod.GET,produces = {"application/json"})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "empNo",value = "员工编号",dataType = "Integer")
+    })
+    public RestResponse showEmployeeByEmpNo(Integer empNo) {
+        return employeeService.queryEmployeeInfoByEmpNo(empNo);
+    }
+
+    @ApiOperation(value = "删除员工信息",notes = "根据员工id删除用户信息",httpMethod = "GET")
+    @RequestMapping(value = "/employee/delete/employeebyempno", method = RequestMethod.GET,produces = {"application/json"})
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "empNo",value = "员工编号",dataType = "Integer")
+    })
+    public RestResponse deleteEmployeeByEmpo(Integer empNo) {
+        return employeeService.deleteEmployeeInfoByEmpNo(empNo);
+    }
+
 }

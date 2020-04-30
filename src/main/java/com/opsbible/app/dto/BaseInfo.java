@@ -13,7 +13,7 @@ import java.io.Serializable;
 @ApiModel(value = "员工")
 public class BaseInfo implements Serializable {
 
-    @ApiModelProperty(value = "出生日期")
+    @ApiModelProperty(value = "出生日期",example = "2020-05-01")
     private String birthDate;
 
     @ApiModelProperty(value = "第一名字")
@@ -22,6 +22,6 @@ public class BaseInfo implements Serializable {
     @ApiModelProperty(value = "第二名字")
     private String lastName;
 
-    @ApiModelProperty(value = "性别")
+    @ApiModelProperty(value = "性别",example = "M")
     private String gender;
 }

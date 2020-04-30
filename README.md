@@ -73,7 +73,7 @@ thymeleaf:
 
 ### 数据库数据介绍
 
-![dbinfo](C:\Users\sun\Desktop\app\app\others\images\dbinfo.png)
+![dbinfo](https://opsbible.oss-cn-hongkong.aliyuncs.com/images/dbinfo.png)
 
 去除ping表(额外添加的),其他根据名称大概可以看出主要用功能
 
@@ -151,7 +151,7 @@ on dp.dept_no = d.dept_no
 ```
 
 | birth_date | first_name | last_name | gender | hire_date  |    title     |    dept_name    |
-| :--------: | :--------: | :-------: | :----: | :--------: | :----------: | :-------------: |
+| :-------- | -------- | ------- | ---- | -------- | ---------- | ------------- : |
 | 1957-05-29 |    Mary    |   Swift   |   M    | 1994-05-17 | Senior Staff | Human Resources |
 
 
@@ -171,21 +171,12 @@ select emp_no from employees order by emp_no desc limit 1;
 ```mysql
 INSERT INTO `employees` (`emp_no`, `birth_date`, `first_name`, `last_name`, `gender`, `hire_date`)
 VALUES ('500000', '1992-11-13', 'song', 'xiao', 1, '2020-05-01');
-```
-
-```mysql
-INSERT INTO `salaries` (`emp_no`, `salary`, `from_date`, `to_date`)
-VALUES ('500000', '68888', '2020-05-01', '9999-01-01');
-```
-
-```mysql
 INSERT INTO `titles` (`emp_no`, `title`, `from_date`, `to_date`)
 VALUES ('500000', 'Senior Engineer', '2020-05-01', '9999-01-01');
-```
-
-```mysql
 INSERT INTO `dept_emp` (`emp_no`, `dept_no`, `from_date`, `to_date`)
 VALUES ('500000', 'd005', '2020-05-01', '9999-01-01');
+INSERT INTO `salaries` (`emp_no`, `salary`, `from_date`, `to_date`)
+VALUES ('500000', '68888', '2020-05-01', '9999-01-01');
 ```
 
 删除员工:
@@ -223,11 +214,39 @@ WHERE `emp_no` = '500000' ;
 
 
 
-api:
+### 测试API
 
-涉及sql:
+添加员工(员工编号自增):
 
-```mysql
+请求接口:http://127.0.0.1:8080/api/employee/add
 
+请求数据:
+
+```json
+{
+  "birthDate": "2019-11-11",
+  "deptNo": "d005",
+  "firstName": "Lou",
+  "fromDate": "2019-11-12",
+  "gender": "M",
+  "hireDate": "2019-11-12",
+  "lastName": "Xiaohei",
+  "salary": 88888,
+  "title": "Senior Engineer",
+  "toDate": "9999-11-11"
+}
+```
+
+根据员工基本信息查详细:
+
+接口: http://127.0.0.1:8080/api/employee
+
+```json
+{
+  "birthDate": "2019-11-11",
+  "firstName": "Lou",
+  "gender": "M",
+  "lastName": "Xiaohei"
+}
 ```
 

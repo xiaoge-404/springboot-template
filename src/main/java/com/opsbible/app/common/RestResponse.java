@@ -1,9 +1,10 @@
 package com.opsbible.app.common;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "返回结果")
+@ApiModel(value = "响应包装",description = "返回结果")
 public class RestResponse {
 
         @ApiModelProperty("状态码 0:成功")

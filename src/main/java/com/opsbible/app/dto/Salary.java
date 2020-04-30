@@ -21,6 +21,6 @@ public class Salary  implements Serializable {
     @ApiModelProperty(value = "薪资")
     private Integer salary;
 
-    @ApiModelProperty(value = "生效日期")
+    @ApiModelProperty(value = "生效日期",example = "2020-05-01")
     private Date fromDate;
 }

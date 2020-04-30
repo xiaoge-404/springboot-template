@@ -1,11 +1,7 @@
 package com.opsbible.app;
 
-import com.opsbible.app.dto.BaseInfo;
-import com.opsbible.app.dto.EmployeeInfo;
-import com.opsbible.app.entity.Employees;
 import com.opsbible.app.mapper.EmployeeMapper;
 import com.opsbible.app.service.EmployeeService;
-import com.opsbible.app.utils.GenderEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +21,8 @@ class AppApplicationTests {
 
 	@Test
 	void contextLoads() throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date = format.parse("9999-01-01");
 
 
 	}
