@@ -73,7 +73,7 @@ thymeleaf:
 
 ### 数据库数据介绍
 
-![dbinfo](https://opsbible.oss-cn-hongkong.aliyuncs.com/images/dbinfo.png)
+[dbinfo](https://opsbible.oss-cn-hongkong.aliyuncs.com/images/dbinfo.png)
 
 去除ping表(额外添加的),其他根据名称大概可以看出主要用功能
 
